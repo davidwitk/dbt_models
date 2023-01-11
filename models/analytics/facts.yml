@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: fct_imdb_movies_daily
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+      - name: title
+        tests:
+          - not_null
+          - unique:
+              where: is_latest_day
+            

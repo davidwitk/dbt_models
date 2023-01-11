@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: public
+
+    tables:
+      - name: imdb
+        freshness:
+          error_after: {count: 24, period: hour}
+        loaded_at_field: "extracted_at :: timestamp"
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique
