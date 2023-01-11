@@ -19,6 +19,8 @@ clean-targets:
 models:
   dbt_models:
     staging:
+      +schema: staging
       +materialized: view
     analytics:
+      +schema: analytics
       +materialized: table
