@@ -1,0 +1,42 @@
+[sqlfluff]
+dialect = redshift
+templater = jinja
+rules = L001,L002,L003,L004,L005,L006,L007,L008,L009,L010,L011,L012,L013,L014,L015,L017,L018,L019,L020,L021,L022,L023,L024,L025,L027,L030,L033,L036,L037,L039,L040,L041,L042,L045,L046,L047,L048,L049,L050,L051,L053,L054,L055,L058,L059,L060,L061,L063,L065,L066,L067,L071
+large_file_skip_byte_limit = 50000
+
+[sqlfluff:templater:jinja]
+library_path = sqlfluff/sqlfluff_libs
+
+[sqlfluff:templater:jinja:context]
+target = prod
+
+[sqlfluff:layout:type:casting_operator]
+spacing_before = single
+spacing_after = single
+
+[sqlfluff:rules]
+tab_space_size = 4
+indent_unit = space
+operator_new_lines = after
+
+[sqlfluff:rules:L004]
+indent_unit = space
+tab_space_size = 4
+
+[sqlfluff:rules:L010]
+capitalisation_policy = lower
+
+[sqlfluff:rules:L030]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:L042]
+forbid_subquery_in = both
+
+[sqlfluff:rules:L063]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:L066]
+min_alias_length = 3
+
+[sqlfluff:rules:L067]
+preferred_type_casting_style = shorthand

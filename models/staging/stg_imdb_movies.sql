@@ -1,4 +1,4 @@
-with 
+with
 
 source as (
     select * from {{ source('public', 'imdb') }}
@@ -6,17 +6,17 @@ source as (
 
 base as (
 
-    select 
+    select
         id,
         extracted_at :: timestamp,
-        
-        case 
+
+        case
             when title in ('The Godfather Part II', 'The Godfather: Part II') then 'The Godfather Part II'
             else title
-        end as title, 
+        end as title,
 
         rank,
-        rating, 
+        rating,
         rating_count,
         year,
         link
@@ -26,7 +26,7 @@ base as (
 
 final as (
 
-    select 
+    select
         *,
         row_number() over (partition by title order by extracted_at desc) = 1 as is_latest_day,
         min(extracted_at :: date) over () as first_extraction_day_overall,
