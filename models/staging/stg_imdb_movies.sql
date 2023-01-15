@@ -12,6 +12,7 @@ base as (
 
         case
             when title in ('The Godfather Part II', 'The Godfather: Part II') then 'The Godfather Part II'
+            when title in ('GoodFellas', 'Goodfellas') then 'GoodFellas'
             else title
         end as title,
 
