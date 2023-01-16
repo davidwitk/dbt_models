@@ -5,8 +5,8 @@ source as (
 ),
 
 base as (
-    
-    select 
+
+    select
         md5(movie_id || to_char(_extracted_at :: timestamp, 'yyyy-mm-dd')) as movie_week_id,
 
         -- Movie data
