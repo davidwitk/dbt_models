@@ -1,7 +1,7 @@
 with
 
 source as (
-    select * from {{ source('public', 'imdb') }}
+    select * from {{ source('raw_imdb', 'imdb') }}
 ),
 
 base as (
