@@ -21,6 +21,11 @@ models:
     staging:
       +schema: staging
       +materialized: view
+      +grants: {'select': ['metabase']}
     analytics:
       +schema: analytics
       +materialized: table
+      +grants: {'select': ['metabase']}
+
+on-run-end:
+  - "{% for schema in schemas %}grant usage on schema {{ schema }} to reporter;{% endfor %}"
