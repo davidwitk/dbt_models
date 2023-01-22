@@ -27,8 +27,8 @@ base as (
         (main -> 'humidity') :: decimal as humidity, -- Humidity, %
         (main -> 'pressure') :: decimal as pressure, -- Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
 
-        weather[0] ->> 'main'as weather_type, -- Group of weather parameters (Rain, Snow, Extreme etc.)
-        weather[0] ->> 'description'as weather_description, -- Weather condition within the group. You can get the output in your language.
+        weather[0] ->> 'main' as weather_type, -- Group of weather parameters (Rain, Snow, Extreme etc.)
+        weather[0] ->> 'description' as weather_description, -- Weather condition within the group. You can get the output in your language.
         (clouds -> 'all') :: int as cloudiness, -- Cloudiness, %
         visibility, -- Visibility, meter. The maximum value of the visibility is 10km
 
