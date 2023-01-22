@@ -13,7 +13,7 @@ base as (
 
         id as location_id,
         name as location_name,
-        replace((sys -> 'country') :: varchar, '"', '') as location_country,
+        sys ->> 'country' as location_country,
 
         (coord -> 'lat') :: decimal as location_latitude,
         (coord -> 'lon') :: decimal as location_longitude,
@@ -27,8 +27,8 @@ base as (
         (main -> 'humidity') :: decimal as humidity, -- Humidity, %
         (main -> 'pressure') :: decimal as pressure, -- Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
 
-        replace((weather[0] -> 'main') :: varchar, '"', '') as weather_type, -- Group of weather parameters (Rain, Snow, Extreme etc.)
-        replace((weather[0] -> 'description') :: varchar, '"', '') as weather_description, -- Weather condition within the group. You can get the output in your language.
+        weather[0] ->> 'main'as weather_type, -- Group of weather parameters (Rain, Snow, Extreme etc.)
+        weather[0] ->> 'description'as weather_description, -- Weather condition within the group. You can get the output in your language.
         (clouds -> 'all') :: int as cloudiness, -- Cloudiness, %
         visibility, -- Visibility, meter. The maximum value of the visibility is 10km
 
