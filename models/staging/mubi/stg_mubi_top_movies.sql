@@ -9,6 +9,8 @@ base as (
     select
         md5(movie_id || to_char(_extracted_at :: timestamp, 'yyyy-mm-dd')) as movie_week_id,
 
+        date_trunc('week', _extracted_at :: timestamp) as date_week,
+
         -- Movie data
         movie_id,
         movie_rank,

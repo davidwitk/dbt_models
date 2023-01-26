@@ -18,12 +18,6 @@ sources:
             tests:
               - not_null
               - unique
-      - name: top_movies__details__directors
-        columns:
-          - name: _sdc_id
-            tests:
-              - not_null
-              - unique
         tests:
           - dbt_utils.equal_rowcount:
               compare_model: source('raw_mubi', 'top_movies')
