@@ -8,14 +8,11 @@ movie_details as (
     select * from {{ ref('stg_mubi_top_movies_details') }}
 ),
 
-movie_directors as (
-    select * from {{ ref('stg_mubi_top_movies_details_directors') }}
-),
-
 final as (
 
     select
         movies.movie_week_id,
+        movies.date_week,
 
         -- Movie data
         movies.movie_id,
@@ -26,10 +23,12 @@ final as (
         movie_details.movie_popularity,
         movie_details.movie_url,
 
-        -- Director data (careful, this might be a 1:n relation)
-        movie_directors.director_id,
-        movie_directors.director_name,
-        movie_directors.director_url,
+        -- Director data
+        movie_details.movie_directors,
+        movie_details.director_count,
+        movie_details.director_id_first,
+        movie_details.director_name_first,
+        movie_details.director_url_first,
 
         -- List data
         movies.list_id,
@@ -41,7 +40,6 @@ final as (
 
     from movies
     left join movie_details using (movie_week_id)
-    left join movie_directors using (movie_week_id)
 
 )
 
