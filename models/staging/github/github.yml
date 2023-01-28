@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: raw_github__repositories
+    freshness:
+      error_after: {count: 1, period: day}
+    loaded_at_field: _sdc_extracted_at
+    tables:
+      - name: commits
+        columns:
+          - name: sha
+            tests:
+              - not_null
+              - unique
+      - name: pull_requests
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique
+      - name: repositories
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique
