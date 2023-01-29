@@ -27,5 +27,9 @@ models:
       +materialized: table
       +grants: {'select': ['metabase']}
 
+tests:
+  +store_failures: true
+  +schema: dbt_tests
+
 on-run-end:
   - "{% for schema in schemas %}grant usage on schema {{ schema }} to reporter;{% endfor %}"
