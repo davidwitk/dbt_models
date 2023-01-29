@@ -12,4 +12,9 @@ models:
           - not_null
           - unique:
               where: is_latest_day
-            
+  - name: fct_strasbourg_piscines_frequentation
+    columns:
+      - name: record_id
+        tests:
+          - not_null
+          - unique
