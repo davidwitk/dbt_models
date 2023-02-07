@@ -29,6 +29,17 @@ base as (
 
     from source
 
+),
+
+final as (
+
+    select
+        *,
+        row_number() over (partition by movie_id order by _sdc_extracted_at desc) = 1 as is_latest_day,
+        min(_sdc_extracted_at :: date) over () as first_extraction_day_overall,
+        min(_sdc_extracted_at :: date) over (partition by movie_id) as first_extraction_day
+    from base
+
 )
 
-select * from base
+select * from final

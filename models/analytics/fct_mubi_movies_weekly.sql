@@ -36,7 +36,11 @@ final as (
         movies.list_updated_at,
         movies.list_title,
         movies.list_user_id,
-        movies.list_url
+        movies.list_url,
+
+        movies.is_latest_day,
+        movies.first_extraction_day_overall,
+        movies.first_extraction_day
 
     from movies
     left join movie_details using (movie_week_id)
