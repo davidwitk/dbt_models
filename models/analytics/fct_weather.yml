@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: fct_weather
+    columns:
+      - name: weather_id
+        description: "Unique identifier"
+        meta:
+          dimension:
+            type: string
+      - name: measured_at
+        description: "Time of measurement"
+        meta:
+          dimension:
+            type: timestamp
+      - name: location_name
+        description: "Location of measurement"
+        meta:
+          dimension:
+            type: string
+
+metrics:
+  - name: measure_count
+    label: Count of Measures
+    model: ref('fct_weather')
+    calculation_method: count
+    expression: '*'
+  - name: average_temperature
+    label: Average Temperature
+    model: ref('fct_weather')
+    calculation_method: average
+    expression: temperature
