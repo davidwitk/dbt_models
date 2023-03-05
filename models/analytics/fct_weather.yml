@@ -25,8 +25,15 @@ metrics:
     model: ref('fct_weather')
     calculation_method: count
     expression: '*'
+
+    timestamp: timestamp
+    time_grains: [day, week, month, quarter, year]
+
   - name: average_temperature
     label: Average Temperature
     model: ref('fct_weather')
     calculation_method: average
     expression: temperature
+
+    timestamp: timestamp
+    time_grains: [day, week, month, quarter, year]
