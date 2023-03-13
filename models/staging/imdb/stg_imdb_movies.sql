@@ -25,9 +25,9 @@ final as (
 
     select
         *,
-        row_number() over (partition by title order by extracted_at desc) = 1 as is_latest_day,
+        row_number() over (partition by movie_id order by extracted_at desc) = 1 as is_latest_day,
         min(extracted_at :: date) over () as first_extraction_day_overall,
-        min(extracted_at :: date) over (partition by title) as first_extraction_day
+        min(extracted_at :: date) over (partition by movie_id) as first_extraction_day
     from base
 
 )
