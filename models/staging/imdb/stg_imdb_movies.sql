@@ -8,14 +8,10 @@ base as (
 
     select
         id,
+        regexp_replace(link, 'https://imdb.com/title|/', '', 'g') as movie_id,
         extracted_at :: timestamp,
-
-        case
-            when title in ('The Godfather Part II', 'The Godfather: Part II') then 'The Godfather Part II'
-            when title in ('GoodFellas', 'Goodfellas') then 'GoodFellas'
-            else title
-        end as title,
-
+        title,
+        first_value(title) over (partition by regexp_replace(link, 'https://imdb.com/title|/', '', 'g') order by extracted_at :: timestamp) as title_first,
         rank,
         rating,
         rating_count,

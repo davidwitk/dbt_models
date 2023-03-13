@@ -8,9 +8,13 @@ final as (
 
     select
         id,
+        movie_id,
+
         extracted_at,
 
         title,
+        title_first,
+
         rank,
         rating,
         rating_count,
