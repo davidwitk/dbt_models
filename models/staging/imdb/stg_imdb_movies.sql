@@ -14,7 +14,7 @@ base as (
         first_value(title) over (partition by regexp_replace(link, 'https://imdb.com/title|/', '', 'g') order by extracted_at :: timestamp) as title_first,
         rank,
         rating,
-        rating_count,
+        rating_count as rating_cnt,
         year,
         link
     from source
