@@ -1,5 +1,3 @@
-version: 2
-
 models:
   - name: fct_imdb_movies_daily
     columns:
