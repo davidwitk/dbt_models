@@ -1,6 +1,5 @@
 name: 'dbt_models'
 version: '0.1.0'
-config-version: 2
 
 profile: 'dbt_models'
 
