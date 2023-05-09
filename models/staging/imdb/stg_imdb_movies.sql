@@ -13,7 +13,7 @@ base as (
         title,
         first_value(title) over (partition by regexp_replace(link, 'https://imdb.com/title|/', '', 'g') order by extracted_at :: timestamp) as title_first,
         rank,
-        rating,
+        coalesce(rating :: decimal, rating_20230119_2215) as rating,
         rating_count,
         year,
         link
