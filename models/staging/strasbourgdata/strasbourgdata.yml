@@ -1,7 +1,4 @@
 sources:
   - name: raw_strasbourgdata
-    freshness:
-      error_after: {count: 30, period: minute}
-    loaded_at_field: _sdc_extracted_at
     tables:
       - name: piscines_frequentation
