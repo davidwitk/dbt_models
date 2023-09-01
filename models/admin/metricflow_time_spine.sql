@@ -4,7 +4,7 @@
   )
 }}
 
-with 
+with
 
 days as (
 
@@ -20,8 +20,7 @@ days as (
 
 final as (
 
-    select 
-        date_day :: date as date_day
+    select date_day :: date as date_day
     from days
 )
 
