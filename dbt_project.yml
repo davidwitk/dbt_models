@@ -20,11 +20,11 @@ models:
     staging:
       +schema: staging
       +materialized: view
-      +grants: {'select': ['metabase']}
+      +grants: {'select': ['evidence', 'hex', 'metabase']}
     analytics:
       +schema: analytics
       +materialized: table
-      +grants: {'select': ['metabase']}
+      +grants: {'select': ['evidence', 'hex', 'metabase']}
 
 tests:
   +store_failures: true
