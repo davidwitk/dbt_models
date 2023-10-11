@@ -25,6 +25,15 @@ models:
       +schema: analytics
       +materialized: table
       +grants: {'select': ['evidence', 'hex', 'metabase']}
+  dbt_artifacts:
+    +database: prod
+    +schema: admin
+    staging:
+      +database: prod
+      +schema: admin
+    sources:
+      +database: prod
+      +schema: raw_dbt
 
 tests:
   +store_failures: true
@@ -32,3 +41,4 @@ tests:
 
 on-run-end:
   - "{% for schema in schemas %}grant usage on schema {{ schema }} to reporter;{% endfor %}"
+  - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
