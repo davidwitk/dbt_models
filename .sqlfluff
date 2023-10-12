@@ -18,9 +18,6 @@ indent_unit = space
 spacing_before = single
 spacing_after = single
 
-[sqlfluff:layout:operators]
-operator_new_lines = after
-
 [sqlfluff:rules:aliasing.length]
 min_alias_length = 3
 

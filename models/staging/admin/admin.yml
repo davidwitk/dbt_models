@@ -1,7 +1,13 @@
 sources:
+  - name: information_schema
+    tables: 
+      - name: columns
   - name: raw_nextcloud
     freshness:
       error_after: {count: 1, period: day}
     loaded_at_field: inserted_at
     tables:
       - name: df
+  - name: pg_catalog
+    tables: 
+      - name: pg_stat_user_tables
