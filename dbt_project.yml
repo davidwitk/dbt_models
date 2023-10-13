@@ -17,6 +17,10 @@ clean-targets:
 
 models:
   dbt_models:
+    admin:
+      +schema: admin
+      +materialized: table
+      +grants: {'select': ['evidence', 'hex', 'metabase']}
     staging:
       +schema: staging
       +materialized: view

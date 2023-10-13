@@ -7,7 +7,7 @@
           unique_key='table_id',
           invalidate_hard_deletes=True,
           check_cols=[
-              'size_in_bytes'
+              'size_in_bytes',
               'row_count',
               'column_count'
           ]
