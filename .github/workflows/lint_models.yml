@@ -22,7 +22,7 @@ jobs:
         run: |
           git fetch origin main
           main_sha=$(git rev-parse origin/main)
-          echo "::set-output name=changed_files::$(git diff --diff-filter=d --no-commit-id --name-only -r $main_sha... | grep "\.sql$")"
+          echo "changed_files=$(git diff --diff-filter=d --no-commit-id --name-only -r $main_sha... | grep "\.sql$")" >> $GITHUB_OUTPUT
 
       - name: Lint dbt models
         if: steps.get_changed_files.outputs.changed_files != ''
