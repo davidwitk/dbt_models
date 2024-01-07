@@ -11,7 +11,7 @@ date_spine as (
 
 ),
 
-base as (
+base as ( 
 
     select
         date_day :: date as date_day,
