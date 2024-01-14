@@ -10,7 +10,7 @@ env:
   POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}  
   POSTGRES_PROD_USER: ${{ secrets.POSTGRES_PROD_USER }}
   POSTGRES_PROD_PW: ${{ secrets.POSTGRES_PROD_PW }}
-  POSTGRES_CI_SCHEMA: "${{ format('{0}_{1}', 'ci', steps.findPr.outputs.pr) }}"
+  POSTGRES_CI_SCHEMA: "${{ format('{0}_{1}', 'ci', github.event.number) }}"
 
 jobs:
   lint-models:
@@ -52,10 +52,6 @@ jobs:
       - uses: "actions/setup-python@v2"
         with:
             python-version: "3.8"
-
-      - name: Find Current Pull Request
-        uses: jwalton/gh-find-current-pr@v1.3.0
-        id: findPR
 
       - name: Install dbt
         run: "pip install dbt-postgres==1.7.4"
