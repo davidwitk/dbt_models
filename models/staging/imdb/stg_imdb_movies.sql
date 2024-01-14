@@ -25,6 +25,7 @@ final as (
 
     select
         *,
+        row_number() over (partition by title_first order by extracted_at desc) = 1 as is_latest_day,
         min(extracted_at :: date) over () as first_extraction_day_overall,
         min(extracted_at :: date) over (partition by title_first) as first_extraction_day
     from base
