@@ -10,7 +10,7 @@ env:
   POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}  
   POSTGRES_PROD_USER: ${{ secrets.POSTGRES_PROD_USER }}
   POSTGRES_PROD_PW: ${{ secrets.POSTGRES_PROD_PW }}
-  POSTGRES_CI_SCHEMA: "${{ format('{0}_{1}', 'ci', github.event.number) }}"
+  POSTGRES_CI_SCHEMA: "${{ format('{0}_{1}', 'ci_pr', github.event.number) }}"
 
 jobs:
   lint-models:
