@@ -1,0 +1,32 @@
+dbt_models:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      user: "{{ env_var('POSTGRES_DEV_USER') }}"
+      password: "{{ env_var('POSTGRES_DEV_PW') }}"
+      port: 5432
+      dbname: prod
+      schema: dev
+      threads: 8
+
+    prod:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      user: "{{ env_var('POSTGRES_PROD_USER') }}"
+      password: "{{ env_var('POSTGRES_PROD_PW') }}"
+      port: 5432
+      dbname: prod
+      schema: analytics
+      threads: 8
+
+    ci:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      user: "{{ env_var('POSTGRES_PROD_USER') }}"
+      password: "{{ env_var('POSTGRES_PROD_PW') }}"
+      port: 5432
+      dbname: prod
+      schema: "{{ env_var('POSTGRES_CI_SCHEMA') }}"
+      threads: 8
