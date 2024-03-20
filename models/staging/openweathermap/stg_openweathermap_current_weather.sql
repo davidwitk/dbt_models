@@ -10,6 +10,7 @@ base as (
         md5(id || _sdc_extracted_at :: varchar) as weather_id,
 
         to_timestamp(dt) at time zone 'UTC' as measured_at,
+        to_timestamp(dt) at time zone 'europe/berlin' at time zone 'UTC' as measured_at_cet,
 
         id as location_id,
         name as location_name,
