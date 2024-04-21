@@ -2,17 +2,11 @@ models:
   - name: fct_imdb_movies_daily
     columns:
       - name: id
-        tests:
+        data_tests:
           - not_null
           - unique
       - name: title
-        tests:
+        data_tests:
           - not_null
           - unique:
               where: is_latest_day
-  - name: fct_strasbourg_piscines_frequentation
-    columns:
-      - name: record_id
-        tests:
-          - not_null
-          - unique

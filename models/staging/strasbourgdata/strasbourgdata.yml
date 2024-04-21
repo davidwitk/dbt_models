@@ -1,4 +1,0 @@
-sources:
-  - name: raw_strasbourgdata
-    tables:
-      - name: piscines_frequentation

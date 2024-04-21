@@ -21,16 +21,16 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: '3.12'
 
       - name: Install requirements
         run: pip install -q -r requirements.txt
 
       - name: dbt deps
-        run: dbt deps
+        run: dbt --no-version-check deps
 
       - name: dbt parse
-        run: dbt parse --target prod
+        run: dbt --no-version-check parse --target prod
         
       - name: Upload manifest to S3
         run: |
