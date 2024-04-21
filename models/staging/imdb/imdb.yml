@@ -13,7 +13,7 @@ sources:
               - unique
 
 unit_tests:
-  - name: test_is_valid_imdb_movie_title
+  - name: test_is_valid_imdb_movie_id
     model: stg_imdb_movies
     given:
       - input: source('raw_imdb', 'imdb')
