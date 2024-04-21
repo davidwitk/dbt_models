@@ -11,3 +11,18 @@ sources:
             data_tests:
               - not_null
               - unique
+
+unit_tests:
+  - name: test_is_valid_imdb_movie_id
+    model: stg_imdb_movies
+    given:
+      - input: source('raw_imdb', 'imdb')
+        rows:
+          - {link: https://imdb.com/title/tt0053198/}
+          - {link: https://imdb.com/title/tt0105695}
+          - {link: https://imdb.com/title/tt0083987/}
+    expect:
+      rows:
+        - {link: https://imdb.com/title/tt0053198/, movie_id: tt0053198}
+        - {link: https://imdb.com/title/tt0105695,  movie_id: tt0105695}
+        - {link: https://imdb.com/title/tt0083987/, movie_id: tt0083987}
