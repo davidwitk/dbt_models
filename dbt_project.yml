@@ -39,7 +39,7 @@ models:
       +database: prod
       +schema: raw_dbt
 
-tests:
+data_tests:
   +store_failures: true
   +schema: dbt_tests
 

@@ -7,15 +7,15 @@ sources:
       - name: top_movies
         columns:
           - name: _sdc_id
-            tests:
+            data_tests:
               - not_null
               - unique
       - name: top_movies__details
         columns:
           - name: _sdc_id
-            tests:
+            data_tests:
               - not_null
               - unique
-        tests:
+        data_tests:
           - dbt_utils.equal_rowcount:
               compare_model: source('raw_mubi', 'top_movies')

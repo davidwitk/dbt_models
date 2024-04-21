@@ -8,6 +8,6 @@ sources:
         loaded_at_field: "extracted_at :: timestamp"
         columns:
           - name: id
-            tests:
+            data_tests:
               - not_null
               - unique
