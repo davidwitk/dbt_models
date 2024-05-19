@@ -57,7 +57,7 @@ jobs:
         run: pip install -q -r requirements.txt
       
       - name: Get dependencies
-        run: dbt --no-version-check deps
+        run: dbt deps
 
       - name: Grab manifest.json from S3
         run: |
@@ -68,4 +68,4 @@ jobs:
           AWS_REGION: eu-central-1
 
       - name: Run dbt build (Slim CI)
-        run: dbt --no-version-check build --select state:modified+1 --defer --state ./ --target ci
+        run: dbt build --select state:modified+1 --defer --state ./ --target ci
