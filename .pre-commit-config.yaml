@@ -1,10 +1,10 @@
 repos:
 - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
-  rev: v1.2.0
+  rev: v2.0.1
   hooks:
   - id: check-script-has-no-table-name
 - repo: https://github.com/sqlfluff/sqlfluff
-  rev: 2.3.4
+  rev: 3.0.6
   hooks:
     - id: sqlfluff-lint
       args: [--ignore, "templating"]
