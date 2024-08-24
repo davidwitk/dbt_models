@@ -20,15 +20,12 @@ models:
     admin:
       +schema: admin
       +materialized: table
-      +grants: {'select': ['evidence', 'hex', 'metabase']}
     staging:
       +schema: staging
       +materialized: view
-      +grants: {'select': ['evidence', 'hex', 'metabase']}
     analytics:
       +schema: analytics
       +materialized: table
-      +grants: {'select': ['evidence', 'hex', 'metabase']}
   dbt_artifacts:
     +database: prod
     +schema: admin
@@ -47,5 +44,5 @@ flags:
   source_freshness_run_project_hooks: True
 
 on-run-end:
-  - "{% for schema in schemas %}grant usage on schema {{ schema }} to reporter;{% endfor %}"
+  - "{% if not target.name in ['prod_duckdb', 'dev_duckdb'] %}{% for schema in schemas %}grant usage on schema {{ schema }} to reporter;{% endfor %}{% endif %}"
   - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
