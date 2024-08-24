@@ -43,6 +43,9 @@ data_tests:
   +store_failures: true
   +schema: dbt_tests
 
+flags:
+  source_freshness_run_project_hooks: True
+
 on-run-end:
   - "{% for schema in schemas %}grant usage on schema {{ schema }} to reporter;{% endfor %}"
   - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
