@@ -44,5 +44,5 @@ flags:
   source_freshness_run_project_hooks: True
 
 on-run-end:
-  - "{% if not target.name in ['prod_duckdb', 'dev_duckdb'] %}{% for schema in schemas %}grant usage on schema {{ schema }} to reporter;{% endfor %}{% endif %}"
+  - "{% if not target.name in ['prod_duckdb', 'dev_duckdb'] %}{% for schema in schemas %}grant usage on schema {{ schema }} to reporter; grant select on all tables in schema {{ schema }} to reporter;{% endfor %}{% endif %}"
   - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
