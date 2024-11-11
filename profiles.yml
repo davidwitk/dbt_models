@@ -43,7 +43,7 @@ dbt_models:
       type: duckdb
       schema: analytics
       threads: 16
-      path: 'md:prod'
+      path: md:prod?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}
       extensions:
         - httpfs
         - parquet
