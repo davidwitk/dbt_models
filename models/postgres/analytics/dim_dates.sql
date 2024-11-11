@@ -1,6 +1,4 @@
-with
-
-date_spine as (
+with date_spine as (
 
     {{ dbt_utils.date_spine(
         start_date = "'2010-01-01' :: date",

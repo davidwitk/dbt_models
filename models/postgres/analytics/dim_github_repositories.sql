@@ -1,6 +1,4 @@
-with
-
-repos as (
+with repos as (
     select * from {{ ref('stg_github_repositories') }}
 )
 

@@ -1,6 +1,4 @@
-with
-
-disk_space as (
+with disk_space as (
     select * from {{ ref('stg_nextcloud_disk_space') }}
 )
 

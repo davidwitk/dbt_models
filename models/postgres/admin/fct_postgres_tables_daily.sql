@@ -1,6 +1,4 @@
-with
-
-table_stats as (
+with table_stats as (
     select * from {{ ref('snapshot_stg_postgres_admin_table_stats') }}
 ),
 
