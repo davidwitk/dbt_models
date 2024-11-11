@@ -1,4 +1,4 @@
-name: deploy
+name: Deployment Pipeline for main
 
 on:
   push:
