@@ -16,7 +16,7 @@ clean-targets:
 models:
   dbt_models:
     duckdb:
-      materialized: external
+      +materialized: external
     postgres:
       admin:
         +schema: admin
