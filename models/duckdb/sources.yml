@@ -1,0 +1,6 @@
+sources:
+  - name: s3
+    tables:
+      - name: imdb_top_250
+        meta:
+          external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"

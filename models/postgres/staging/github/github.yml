@@ -1,6 +1,5 @@
 sources:
   - name: raw_github__repositories
-    database: "{{ 'postgres' if target.name in ['prod_duckdb', 'dev_duckdb'] else 'prod' }}"
     freshness:
       error_after: {count: 1, period: day}
     loaded_at_field: _sdc_extracted_at

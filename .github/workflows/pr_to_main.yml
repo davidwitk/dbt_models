@@ -32,7 +32,7 @@ jobs:
         run: |
           git fetch origin main
           main_sha=$(git rev-parse origin/main)
-          echo "changed_files=$(git diff --diff-filter=d --no-commit-id --name-only -r $main_sha... | grep "\.sql$")" >> $GITHUB_OUTPUT
+          echo "changed_files=$(git diff --diff-filter=d --no-commit-id --name-only -r $main_sha... | grep "\.sql$" | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
       - name: Lint dbt models
         if: steps.get_changed_files.outputs.changed_files != ''
@@ -68,4 +68,4 @@ jobs:
           AWS_REGION: eu-central-1
 
       - name: Run dbt build (Slim CI)
-        run: dbt build --select state:modified+1 --defer --state ./ --target ci
+        run: dbt build --select state:modified+1 --exclude duckdb --defer --state ./ --target ci
