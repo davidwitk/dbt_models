@@ -1,6 +1,6 @@
 packages:
   - package: brooklyn-data/dbt_artifacts
-    version: 2.6.4
+    version: 2.7.0
   - package: dbt-labs/dbt_utils
     version: 1.3.0
-sha1_hash: 2aad9be8510aee8487f2345ca2f8afa5282d9b2c
+sha1_hash: 6a7fb7fe025ee4c6dd2af7d0aa82af5125bb5da2
