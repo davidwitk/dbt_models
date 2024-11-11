@@ -50,7 +50,3 @@ dbt_models:
           region: "{{ env_var('AWS_REGION') }}"
           key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
-      attach:
-        - path: postgresql://{{ env_var('POSTGRES_PROD_USER') }}:{{ env_var('POSTGRES_PROD_PW') }}@{{ env_var('POSTGRES_HOST') }}:5432/prod
-          alias: postgres
-          type: postgres
