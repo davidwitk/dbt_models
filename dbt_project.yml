@@ -15,6 +15,8 @@ clean-targets:
 
 models:
   dbt_models:
+    duckdb:
+      materialized: external
     postgres:
       admin:
         +schema: admin
@@ -46,4 +48,7 @@ flags:
   source_freshness_run_project_hooks: True
 
 on-run-end:
+  # Upload the results dbt_artifacts package when the target is prod
   - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
+  # Re-run external models with an in-memory version of dbt-duckdb
+  - "{% if target.name in ['prod_duckdb', 'dev_duckdb'] %}{{ register_upstream_external_models() }}{% endif %}"

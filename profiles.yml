@@ -33,6 +33,7 @@ dbt_models:
 
     dev_duckdb:
       type: duckdb
+      external_root: s3://data-lake-chodera/dbt_models
       attach:
         - path: postgresql://{{ env_var('POSTGRES_PROD_USER') }}:{{ env_var('POSTGRES_PROD_PW') }}@{{ env_var('POSTGRES_HOST') }}:5432/prod
           alias: postgres
