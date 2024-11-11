@@ -1,5 +1,5 @@
 with movies as (
-    select * from {{ ref('stg_imdb__movies') }}
+    select * from {{ ref('stg_imdb') }}
 ),
 
 final as (
