@@ -1,6 +1,4 @@
 name: 'dbt_models'
-version: '0.1.0'
-
 profile: 'dbt_models'
 
 model-paths: ["models"]
@@ -11,21 +9,25 @@ macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
 target-path: "target"
-clean-targets:         
+clean-targets:
   - "target"
   - "dbt_packages"
 
 models:
   dbt_models:
-    admin:
-      +schema: admin
-      +materialized: table
-    staging:
-      +schema: staging
-      +materialized: view
-    analytics:
-      +schema: analytics
-      +materialized: table
+    postgres:
+      admin:
+        +schema: admin
+        +materialized: table
+        +grants: {'select': ['evidence', 'hex', 'metabase']}
+      staging:
+        +schema: staging
+        +materialized: view
+        +grants: {'select': ['evidence', 'hex', 'metabase']}
+      analytics:
+        +schema: analytics
+        +materialized: table
+        +grants: {'select': ['evidence', 'hex', 'metabase']}
   dbt_artifacts:
     +database: prod
     +schema: admin
@@ -44,5 +46,4 @@ flags:
   source_freshness_run_project_hooks: True
 
 on-run-end:
-  - "{% if not target.name in ['prod_duckdb', 'dev_duckdb'] %}{% for schema in schemas %}grant usage on schema {{ schema }} to reporter; grant select on all tables in schema {{ schema }} to reporter;{% endfor %}{% endif %}"
   - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
