@@ -41,7 +41,9 @@ dbt_models:
 
     prod_duckdb:
       type: duckdb
-      external_root: s3://data-lake-chodera/dbt_models/prod
+      schema: analytics
+      threads: 16
+      path: 'md:prod'
       extensions:
         - httpfs
         - parquet
