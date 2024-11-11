@@ -4,9 +4,7 @@
   )
 }}
 
-with
-
-weather as (
+with weather as (
     select * from {{ ref('stg_openweathermap_current_weather') }}
 )
 

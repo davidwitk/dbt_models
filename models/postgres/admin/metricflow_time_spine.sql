@@ -1,6 +1,4 @@
-with
-
-days as (
+with days as (
 
     {{
         dbt_utils.date_spine(

@@ -1,6 +1,4 @@
-with
-
-commits as (
+with commits as (
     select * from {{ ref('stg_github_commits') }}
 )
 

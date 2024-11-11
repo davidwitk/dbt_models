@@ -1,6 +1,4 @@
-with
-
-tables as (
+with tables as (
     select * from {{ source('pg_catalog', 'pg_stat_user_tables') }}
 ),
 

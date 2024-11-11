@@ -1,6 +1,4 @@
-with
-
-movies as (
+with movies as (
     select * from {{ ref('stg_mubi_top_movies') }}
 ),
 

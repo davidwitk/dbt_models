@@ -1,6 +1,4 @@
-with
-
-source as (
+with source as (
     select * from {{ source('raw_mubi', 'top_movies__details') }}
 ),
 

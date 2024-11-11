@@ -1,6 +1,4 @@
-with
-
-source as (
+with source as (
     select * from {{ source('raw_github__repositories', 'pull_requests') }}
 ),
 
