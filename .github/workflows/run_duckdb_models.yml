@@ -1,0 +1,30 @@
+name: Run DuckDB models on a nightly schedule
+
+on:
+  schedule:
+  - cron: 0 3 * * *
+  workflow_dispatch: null
+
+env:
+  DBT_PROFILES_DIR: ./
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install requirements
+        run: pip install -q -r requirements.txt
+
+      - name: dbt deps
+        run: dbt deps
+
+      - name: dbt run
+        run: dbt run --select duckdb --target prod_duckdb
