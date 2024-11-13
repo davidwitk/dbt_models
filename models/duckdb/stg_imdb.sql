@@ -10,13 +10,13 @@ base as (
         extracted_at :: timestamp as extracted_at,
         title,
         first_value(title) over (partition by movie_id order by extracted_at :: timestamp) as title_first,
-        rank,
+        rank :: int as rank,
         case
             when rating_20230119_2215 is not null then rating_20230119_2215
             else split_part(rating, chr(160), 1) :: double
         end as rating,
-        rating_count,
-        year,
+        rating_count :: int as rating_count,
+        year :: int as year,
         link
     from source
 
