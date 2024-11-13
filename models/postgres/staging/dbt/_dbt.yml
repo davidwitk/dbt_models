@@ -1,0 +1,7 @@
+sources:
+  - name: raw_dbt
+
+    tables:
+      - name: invocations
+      - name: model_executions
+
