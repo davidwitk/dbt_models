@@ -1,4 +1,4 @@
-dbt-core==1.9.0
+dbt-core==1.9.2
 dbt-duckdb==1.9.1
 dbt-postgres==1.9.0
 sqlfluff==3.3.0
