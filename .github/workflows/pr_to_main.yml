@@ -20,12 +20,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: "actions/setup-python@v2"
-        with:
-            python-version: "3.12"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
-      - name: Install requirements
-        run: pip install -q -r requirements.txt
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install the dependencies
+        run: uv sync
 
       - name: Get changed files
         id: get_changed_files
@@ -38,7 +42,7 @@ jobs:
         if: steps.get_changed_files.outputs.changed_files != ''
         run: |
           echo "Linting:" ${{ steps.get_changed_files.outputs.changed_files }}
-          sqlfluff lint ${{ steps.get_changed_files.outputs.changed_files }} --ignore templating
+          uv run sqlfluff lint ${{ steps.get_changed_files.outputs.changed_files }} --ignore templating
 
   slim-ci:
     runs-on: ubuntu-latest
@@ -49,15 +53,19 @@ jobs:
     steps:
       - uses: "actions/checkout@v2"
 
-      - uses: "actions/setup-python@v2"
-        with:
-            python-version: "3.12"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
-      - name: Install requirements
-        run: pip install -q -r requirements.txt
-      
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install the dependencies
+        run: uv sync
+
       - name: Get dependencies
-        run: dbt deps
+        run: uv run dbt deps
 
       - name: Grab manifest.json from S3
         run: |
@@ -68,4 +76,4 @@ jobs:
           AWS_REGION: eu-central-1
 
       - name: Run dbt build (Slim CI)
-        run: dbt build --select state:modified+1 --exclude duckdb --defer --state ./ --target ci
+        run: uv run dbt build --select state:modified+1 --exclude duckdb --defer --state ./ --target ci

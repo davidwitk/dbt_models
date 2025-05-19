@@ -16,18 +16,22 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
-      - name: Install requirements
-        run: pip install -q -r requirements.txt
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install the dependencies
+        run: uv sync
 
       - name: dbt deps
-        run: dbt deps
+        run: uv run dbt deps
 
       - name: dbt run
-        run: dbt run --select duckdb --target prod_duckdb
+        run: uv run dbt run --select duckdb --target prod_duckdb
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

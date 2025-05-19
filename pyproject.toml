@@ -1,0 +1,15 @@
+[project]
+name = "dbt-models"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "dbt-core==1.9.4",
+    "dbt-duckdb==1.9.3",
+    "dbt-postgres==1.9.0",
+    "sqlfluff==3.4.0",
+]
+
+[tool.uv.workspace]
+members = [
+    "test",
+]
