@@ -28,6 +28,9 @@ jobs:
         with:
           python-version-file: ".python-version"
 
+      - name: Install the dependencies
+        run: uv sync
+
       - name: Get changed files
         id: get_changed_files
         run: |
@@ -57,9 +60,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version-file: ".python-version"
-      
+
+      - name: Install the dependencies
+        run: uv sync
+
       - name: Get dependencies
-        run: dbt deps
+        run: uv run dbt deps
 
       - name: Grab manifest.json from S3
         run: |
@@ -70,4 +76,4 @@ jobs:
           AWS_REGION: eu-central-1
 
       - name: Run dbt build (Slim CI)
-        run: dbt build --select state:modified+1 --exclude duckdb --defer --state ./ --target ci
+        run: uv run dbt build --select state:modified+1 --exclude duckdb --defer --state ./ --target ci

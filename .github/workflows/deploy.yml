@@ -27,11 +27,14 @@ jobs:
         with:
           python-version-file: ".python-version"
 
+      - name: Install the dependencies
+        run: uv sync
+
       - name: dbt deps
-        run: dbt deps
+        run: uv run dbt deps
 
       - name: dbt parse
-        run: dbt parse --target prod
+        run: uv run dbt parse --target prod
         
       - name: Upload manifest to S3
         run: |
