@@ -42,7 +42,7 @@ jobs:
         if: steps.get_changed_files.outputs.changed_files != ''
         run: |
           echo "Linting:" ${{ steps.get_changed_files.outputs.changed_files }}
-          sqlfluff lint ${{ steps.get_changed_files.outputs.changed_files }} --ignore templating
+          uv run sqlfluff lint ${{ steps.get_changed_files.outputs.changed_files }} --ignore templating
 
   slim-ci:
     runs-on: ubuntu-latest
