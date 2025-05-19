@@ -25,7 +25,7 @@ jobs:
             python-version: "3.12"
 
       - name: Install requirements
-        run: pip install -q -r requirements.txt
+        run: uv sync
 
       - name: Get changed files
         id: get_changed_files
@@ -54,7 +54,7 @@ jobs:
             python-version: "3.12"
 
       - name: Install requirements
-        run: pip install -q -r requirements.txt
+        run: uv sync
       
       - name: Get dependencies
         run: dbt deps
