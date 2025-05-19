@@ -12,7 +12,7 @@ with date_spine as (
 base as (
 
     select
-        date_day :: date as date_day, 
+        date_day :: date as date_day,
 
         date_part('year', date_day) as date_year,
         date_part('month', date_day) as date_month,
