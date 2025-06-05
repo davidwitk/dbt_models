@@ -30,15 +30,15 @@ jobs:
       - name: Install the dependencies
         run: uv sync
 
-      - name: dbt deps
-        run: uv run dbt deps
-
-      - name: dbt parse
-        run: uv run dbt parse --target prod
-        
-      - name: Upload manifest to S3
+      - name: Run dbt to generate metadata
         run: |
-          aws s3 cp target/manifest.json ${{ secrets.AWS_BUCKET_URL }}
+          uv run dbt deps
+          uv run dbt parse --target prod
+          uv run dbt docs generate --target prod
+        
+      - name: Upload target folder to S3
+        run: |
+          aws s3 cp target/ ${{ secrets.AWS_BUCKET_URL }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
