@@ -6,6 +6,7 @@ dependencies = [
     "dbt-core==1.9.4",
     "dbt-duckdb==1.9.3",
     "dbt-postgres==1.9.0",
+    "recce==1.6.0",
     "sqlfluff==3.4.0",
 ]
 
