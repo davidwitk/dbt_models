@@ -12,7 +12,8 @@ final as (
 
         title,
         title_first,
-
+        
+        rank,
         rating,
         rating_count,
         year,
