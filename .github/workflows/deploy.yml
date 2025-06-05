@@ -38,7 +38,7 @@ jobs:
         
       - name: Upload target folder to S3
         run: |
-          aws s3 cp target/ ${{ secrets.AWS_BUCKET_URL }}
+          aws s3 cp target/ ${{ secrets.AWS_BUCKET_URL }} --recursive
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
