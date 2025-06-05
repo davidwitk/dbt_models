@@ -86,7 +86,7 @@ jobs:
 
       - name: Run Recce
         run: |
-          uv run recce run --github-pull-request-url ${{ github.event.pull_request.html_url }} --target-path target --target-base-path target-base
+          uv run recce run --github-pull-request-url ${{ github.event.pull_request.html_url }} --target-path target --target-base-path target-base --target ci
 
       - name: Upload Recce State File
         uses: actions/upload-artifact@v4

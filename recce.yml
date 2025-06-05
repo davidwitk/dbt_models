@@ -5,9 +5,9 @@ checks:
   description: Check the row count diff for all modified table models.
   type: row_count_diff
   params:
-    select: state:modified,config.materialized:table
+    select: state:modified+
 - name: Schema diff
   description: Check the schema diff for all modified table models.
   type: schema_diff
   params:
-    select: state:modified,config.materialized:table
+    select: state:modified+
