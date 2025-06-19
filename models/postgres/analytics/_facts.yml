@@ -1,5 +1,7 @@
 models:
   - name: fct_imdb_movies_daily
+    config:
+      +event_time: extracted_at
     columns:
       - name: id
         data_tests:
