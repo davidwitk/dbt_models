@@ -3,8 +3,9 @@ sources:
     tables: 
       - name: columns
   - name: raw_nextcloud
-    freshness:
-      error_after: {count: 1, period: day}
+    config: 
+      freshness:
+        error_after: {count: 1, period: day}
     loaded_at_field: inserted_at
     tables:
       - name: df
