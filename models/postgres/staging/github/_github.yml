@@ -1,7 +1,8 @@
 sources:
   - name: raw_github__repositories
-    freshness:
-      error_after: {count: 1, period: day}
+    config:
+      freshness:
+        error_after: {count: 1, period: day}
     loaded_at_field: _sdc_extracted_at
     tables:
       - name: commits

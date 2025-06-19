@@ -1,7 +1,8 @@
 sources:
   - name: raw_openweathermap
-    freshness:
-      error_after: {count: 1, period: hour}
+    config:
+      freshness:
+        error_after: {count: 1, period: hour}
     loaded_at_field: _sdc_extracted_at
     tables:
       - name: current_weather_stream
