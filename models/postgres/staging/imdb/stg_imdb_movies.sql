@@ -1,3 +1,9 @@
+{{
+  config(
+    event_time='extracted_at',
+    )
+}}
+
 with source as (
     select * from {{ source('raw_imdb', 'imdb') }}
 ),
