@@ -4,3 +4,4 @@ logs/
 recce-state-file/
 *.pyc
 .user.yml
+dbt_internal_packages/
