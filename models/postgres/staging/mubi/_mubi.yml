@@ -19,4 +19,5 @@ sources:
               - unique
         data_tests:
           - dbt_utils.equal_rowcount:
-              compare_model: source('raw_mubi', 'top_movies')
+              arguments:
+                compare_model: source('raw_mubi', 'top_movies')
