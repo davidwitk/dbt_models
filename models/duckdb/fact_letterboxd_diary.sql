@@ -5,13 +5,19 @@ with movies as (
 final as (
 
     select
-        watch_date,
+        imdb_id,
         title,
+        watch_date,
         year,
         rating,
         screen_type,
         is_rewatch,
-        letterboxd_url
+        tmdb_rating,
+        tmdb_rating_count,
+        countries,
+        genres,
+        letterboxd_url,
+        imdb_url
     from movies
 
 )
