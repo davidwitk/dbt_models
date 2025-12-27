@@ -5,8 +5,9 @@ with source as (
 base as (
 
     select
-        "Watched Date" as watch_date,
+        imdb_id,
         name as title,
+        "Watched Date" as watch_date,
         year,
         rating,
         case
@@ -15,7 +16,15 @@ base as (
         end as screen_type,
         tags,
         rewatch as is_rewatch,
-        "Letterboxd Uri" as letterboxd_url
+
+        tmdb_rating,
+        tmdb_rating_count,
+        countries,
+        genres,
+
+        "Letterboxd Uri" as letterboxd_url,
+        imdb_url
+
     from source
 
 )
