@@ -1,6 +1,6 @@
 {% macro generate_schema_name(custom_schema_name, node) %}
 
-    {%- if target.name == ci -%}
+    {%- if target.name == 'ci' -%}
         {%- set default_schema = target.schema -%}
         {%- if custom_schema_name is none -%}
             {{ default_schema }}
