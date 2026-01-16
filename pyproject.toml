@@ -1,12 +1,12 @@
 [project]
 name = "dbt-models"
 version = "0.1.0"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-    "dbt-core==1.11.0",
+    "dbt-core==1.11.2",
     "dbt-duckdb==1.10.0",
-    "dbt-postgres==1.9.1",
-    "sqlfluff==3.5.0",
+    "dbt-postgres==1.10.0",
+    "sqlfluff==4.0.0",
 ]
 
 [tool.uv.workspace]
