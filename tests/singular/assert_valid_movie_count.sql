@@ -1,7 +1,7 @@
 /*
 
 This test fails in case there is not the expected number of movies per extraction:
-- IMBb: 250
+- IMDb: 250
 - Mubi: 1000
 
 */
@@ -19,7 +19,7 @@ mubi as (
 unioned as (
 
     select
-        'IMBb' as source,
+        'IMDb' as source,
         extracted_at :: date as extracted_date
     from imdb
 
