@@ -1,0 +1,1 @@
+select * from "prod"."staging"."stg_dbt_model_executions"

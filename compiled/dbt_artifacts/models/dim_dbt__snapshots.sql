@@ -1,0 +1,28 @@
+with
+    base as (select * from "prod"."admin"."stg_dbt__snapshots"),
+
+    snapshots as (
+
+        select
+            snapshot_execution_id,
+            command_invocation_id,
+            node_id,
+            run_started_at,
+            name,
+             database
+            ,
+             schema
+            ,
+            depends_on_nodes,
+            package_name,
+            path,
+            checksum,
+            strategy,
+            meta,
+            alias
+        from base
+
+    )
+
+select *
+from snapshots
