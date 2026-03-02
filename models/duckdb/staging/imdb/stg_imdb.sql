@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('s3', 'imdb_top_250') }}
+    select * from {{ source('s3', 'raw_imdb_top_250') }}
 ),
 
 base as (

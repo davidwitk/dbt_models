@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('s3', 'letterboxd_diary') }}
+    select * from {{ source('s3', 'raw_letterboxd_diary') }}
 ),
 
 base as (
