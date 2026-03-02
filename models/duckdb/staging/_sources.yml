@@ -4,6 +4,23 @@ sources:
       - name: raw_github_commits
         meta:
           external_location: "read_csv('s3://data-lake-chodera/github_data/commits.csv', header=True)"
+        columns:
+          - name: sha
+            data_tests:
+              - not_null
+              - unique
+          - name: pull_requests
+            columns:
+              - name: id
+                data_tests:
+                  - not_null
+                  - unique
+          - name: repositories
+            columns:
+              - name: id
+                data_tests:
+                  - not_null
+                  - unique
       - name: raw_github_prs
         meta:
           external_location: "read_csv('s3://data-lake-chodera/github_data/prs.csv', header=True)"
