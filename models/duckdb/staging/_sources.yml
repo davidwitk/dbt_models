@@ -1,0 +1,18 @@
+sources:
+  - name: s3
+    tables:
+      - name: raw_github_commits
+        meta:
+          external_location: "read_csv('s3://data-lake-chodera/github_data/commits.csv', header=True)"
+      - name: raw_github_prs
+        meta:
+          external_location: "read_csv('s3://data-lake-chodera/github_data/prs.csv', header=True)"
+      - name: raw_github_repos
+        meta:
+          external_location: "read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
+      - name: imdb_top_250
+        meta:
+          external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
+      - name: letterboxd_diary
+        meta:
+          external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
