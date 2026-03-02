@@ -71,8 +71,8 @@ jobs:
 
       - name: Grab manifest and catalog from S3
         run: | 
-          aws s3 cp ${{ secrets.AWS_BUCKET_URL }}/manifest.json ./target-base/manifest.json
-          aws s3 cp ${{ secrets.AWS_BUCKET_URL }}/catalog.json ./target-base/catalog.json
+          aws s3 cp ${{ secrets.AWS_BUCKET_URL }}/dbt_models/ci/manifest.json ./target-base/manifest.json
+          aws s3 cp ${{ secrets.AWS_BUCKET_URL }}/dbt_models/ci/catalog.json ./target-base/catalog.json
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -41,8 +41,8 @@ jobs:
         
       - name: Upload manifest and catalog to S3
         run: |
-          aws s3 cp target/manifest.json ${{ secrets.AWS_BUCKET_URL }}
-          aws s3 cp target/catalog.json ${{ secrets.AWS_BUCKET_URL }}
+          aws s3 cp target/manifest.json ${{ secrets.AWS_BUCKET_URL }}/dbt_models/ci
+          aws s3 cp target/catalog.json ${{ secrets.AWS_BUCKET_URL }}/dbt_models/ci
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
