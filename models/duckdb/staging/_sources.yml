@@ -10,9 +10,9 @@ sources:
       - name: raw_github_repos
         meta:
           external_location: "read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
-      - name: imdb_top_250
+      - name: raw_imdb_top_250
         meta:
           external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
-      - name: letterboxd_diary
+      - name: raw_letterboxd_diary
         meta:
           external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
