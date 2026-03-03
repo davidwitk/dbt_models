@@ -22,14 +22,17 @@ dbt_models:
       threads: 8
 
     ci:
-      type: postgres
-      host: "{{ env_var('POSTGRES_HOST') }}"
-      user: "{{ env_var('POSTGRES_PROD_USER') }}"
-      password: "{{ env_var('POSTGRES_PROD_PW') }}"
-      port: 5432
-      dbname: prod
-      schema: "{{ env_var('POSTGRES_CI_SCHEMA') }}"
-      threads: 8
+      type: duckdb
+      external_root: "${CI_DUCKDB_EXTERNAL_ROOT}"
+      threads: 4
+      extensions:
+        - httpfs
+        - parquet
+      secrets:
+        - type: s3
+          region: "eu-central-1"
+          key_id: "${AWS_ACCESS_KEY_ID}"
+          secret: "${AWS_SECRET_ACCESS_KEY}"
 
     dev_duckdb:
       type: duckdb

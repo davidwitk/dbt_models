@@ -1,8 +1,14 @@
 with source as (
     -- Unioning the Postgres and S3 (DuckDB) sources for invocations  
-    select 'postgres' as source, * from {{ source('postgres', 'invocations') }}
+    select
+        'postgres' as source,
+        *
+    from {{ source('postgres', 'invocations') }}
     union all
-    select 'duckdb' as source, * from {{ source('s3', 'raw_dbt_invocations') }}
+    select
+        'duckdb' as source,
+        *
+    from {{ source('s3', 'raw_dbt_invocations') }}
 ),
 
 base as (
