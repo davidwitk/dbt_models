@@ -81,7 +81,7 @@ jobs:
       - name: Run dbt build (Slim CI)
         run: |
           uv run dbt deps
-          uv run dbt build --select state:modified+1 --exclude postgres --defer --state ./target-base --target ci --target-path target
+          uv run dbt build --select state:modified+1 --select duckdb --defer --state ./target-base --target ci --target-path target
           uv run dbt docs generate --target ci --target-path target
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
