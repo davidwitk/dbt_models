@@ -25,6 +25,8 @@ dbt_models:
       type: duckdb
       external_root: "{{ env_var('CI_DUCKDB_EXTERNAL_ROOT') }}"
       threads: 4
+      plugins:
+        - module: postgres
       attach:
         - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
           alias: postgres
