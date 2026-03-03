@@ -30,10 +30,10 @@ dbt_models:
       attach:
         - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
           alias: postgres
-          type: postgres
       extensions:
         - httpfs
         - parquet
+        - postgres
       secrets:
         - type: s3
           region: "{{ env_var('AWS_REGION') }}"
