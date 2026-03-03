@@ -1,0 +1,19 @@
+sources:
+  - name: postgres
+    database: prod
+    schema: raw_dbt
+
+    tables:
+      - name: invocations
+      - name: model_executions
+
+  - name: s3
+    tables:
+      - name: raw_dbt_invocations
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/dbt_artifacts/invocations/*.parquet')"
+      - name: raw_dbt_model_executions
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/dbt_artifacts/model_executions/*.parquet')"

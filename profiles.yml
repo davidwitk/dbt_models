@@ -22,14 +22,22 @@ dbt_models:
       threads: 8
 
     ci:
-      type: postgres
-      host: "{{ env_var('POSTGRES_HOST') }}"
-      user: "{{ env_var('POSTGRES_PROD_USER') }}"
-      password: "{{ env_var('POSTGRES_PROD_PW') }}"
-      port: 5432
-      dbname: prod
-      schema: "{{ env_var('POSTGRES_CI_SCHEMA') }}"
-      threads: 8
+      type: duckdb
+      external_root: "{{ env_var('CI_DUCKDB_EXTERNAL_ROOT') }}"
+      threads: 4
+      attach:
+        - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
+          alias: prod
+          type: postgres
+      extensions:
+        - httpfs
+        - parquet
+        - postgres
+      secrets:
+        - type: s3
+          region: "{{ env_var('AWS_REGION') }}"
+          key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
+          secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
 
     dev_duckdb:
       type: duckdb
@@ -38,6 +46,14 @@ dbt_models:
         - path: postgresql://{{ env_var('POSTGRES_PROD_USER') }}:{{ env_var('POSTGRES_PROD_PW') }}@{{ env_var('POSTGRES_HOST') }}:5432/prod
           alias: postgres
           type: postgres
+      extensions:
+        - httpfs
+        - parquet
+      secrets:
+        - type: s3
+          region: "{{ env_var('AWS_REGION') }}"
+          key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
+          secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
 
     prod_duckdb:
       type: duckdb

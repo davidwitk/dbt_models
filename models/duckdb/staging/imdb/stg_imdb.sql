@@ -5,7 +5,7 @@ with source as (
 base as (
 
     select
-        id,
+        id || rank as id,
         regexp_replace(link, '/$', '') as movie_id,
         extracted_at :: timestamp as extracted_at,
         title,
