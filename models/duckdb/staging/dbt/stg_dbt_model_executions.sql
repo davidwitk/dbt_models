@@ -1,4 +1,4 @@
-with source as (
+with unioned as (
     -- Unioning the Postgres and S3 (DuckDB) sources for model executions
     select
         'postgres' as source,
@@ -14,6 +14,7 @@ with source as (
 base as (
 
     select
+        source,
         command_invocation_id || node_id as model_execution_id,
         command_invocation_id,
         node_id,
@@ -31,7 +32,7 @@ base as (
         alias,
         message,
         adapter_response
-    from source
+    from unioned
 
 )
 

@@ -1,4 +1,4 @@
-with source as (
+with unioned as (
     -- Unioning the Postgres and S3 (DuckDB) sources for invocations  
     select
         'postgres' as source,
@@ -14,6 +14,7 @@ with source as (
 base as (
 
     select
+        source,
         command_invocation_id,
         dbt_version,
         project_name,
@@ -33,7 +34,7 @@ base as (
         dbt_vars,
         invocation_args,
         dbt_custom_envs
-    from source
+    from unioned
 
 )
 
