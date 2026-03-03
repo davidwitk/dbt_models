@@ -27,7 +27,7 @@ dbt_models:
       threads: 4
       attach:
         - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
-          alias: postgres
+          alias: prod
           type: postgres
       extensions:
         - httpfs
