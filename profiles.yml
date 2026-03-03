@@ -49,6 +49,7 @@ dbt_models:
       extensions:
         - httpfs
         - parquet
+        - postgres
       secrets:
         - type: s3
           region: "{{ env_var('AWS_REGION') }}"
@@ -68,6 +69,7 @@ dbt_models:
       extensions:
         - httpfs
         - parquet
+        - postgres
       secrets:
         - type: s3
           region: "{{ env_var('AWS_REGION') }}"
