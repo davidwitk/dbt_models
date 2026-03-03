@@ -52,6 +52,12 @@ sources:
             external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
           freshness: null
 
+      - name: raw_s3_file_inventory
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/s3_data/file_inventory/*.parquet')"
+          freshness: null
+
 unit_tests:
   - name: test_is_valid_imdb_movie_id
     model: stg_imdb

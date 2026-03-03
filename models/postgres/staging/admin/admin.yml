@@ -1,7 +1,0 @@
-sources:
-  - name: information_schema
-    tables: 
-      - name: columns
-  - name: pg_catalog
-    tables: 
-      - name: pg_stat_user_tables
