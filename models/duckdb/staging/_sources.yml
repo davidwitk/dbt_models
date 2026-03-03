@@ -41,8 +41,28 @@ sources:
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
         loaded_at_field: "extracted_at :: timestamp"
+        columns:
+          - name: id
+            data_tests:
+              - not_null
+              - unique      
       - name: raw_letterboxd_diary
         config:
           meta:
             external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
           freshness: null
+
+unit_tests:
+  - name: test_is_valid_imdb_movie_id
+    model: stg_imdb
+    given:
+      - input: source('s3', 'raw_imdb_top_250')
+        rows:
+          - {link: https://imdb.com/title/tt0053198/}
+          - {link: https://imdb.com/title/tt0105695}
+          - {link: https://imdb.com/title/tt0083987/}
+    expect:
+      rows:
+        - {link: https://imdb.com/title/tt0053198/, movie_id: tt0053198}
+        - {link: https://imdb.com/title/tt0105695,  movie_id: tt0105695}
+        - {link: https://imdb.com/title/tt0083987/, movie_id: tt0083987}

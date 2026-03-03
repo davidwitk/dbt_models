@@ -9,7 +9,7 @@ This test fails in case there is not the expected number of movies per extractio
 with
 
 imdb as (
-    select * from {{ ref('fct_imdb_movies_daily') }}
+    select * from {{ ref('fact_imdb') }}
 ),
 
 mubi as (
