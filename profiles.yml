@@ -27,7 +27,7 @@ dbt_models:
       threads: 4
       attach:
         - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
-          alias: prod
+          alias: pg_prod
           type: postgres
       extensions:
         - httpfs
@@ -44,7 +44,7 @@ dbt_models:
       external_root: s3://data-lake-chodera/dbt_models/dev
       attach:
         - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
-          alias: prod
+          alias: pg_prod
           type: postgres
       extensions:
         - httpfs
@@ -61,7 +61,7 @@ dbt_models:
       external_root: s3://data-lake-chodera/dbt_models/prod
       attach:
         - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
-          alias: prod
+          alias: ppg_prodd
           type: postgres
       schema: analytics
       threads: 16

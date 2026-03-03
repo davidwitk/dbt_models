@@ -1,6 +1,6 @@
 sources:
   - name: postgres
-    database: prod
+    database: pg_prod
     schema: raw_dbt
 
     tables:
