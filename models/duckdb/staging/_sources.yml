@@ -1,9 +1,14 @@
 sources:
   - name: s3
+    config:
+      freshness:
+        error_after: {count: 24, period: hour}
     tables:
       - name: raw_github_commits
-        meta:
-          external_location: "read_csv('s3://data-lake-chodera/github_data/commits.csv', header=True)"
+        config:
+          meta:
+            external_location: "read_csv('s3://data-lake-chodera/github_data/commits.csv', header=True)"
+        loaded_at_field: _extracted_at
         columns:
           - name: sha
             data_tests:
@@ -22,14 +27,22 @@ sources:
                   - not_null
                   - unique
       - name: raw_github_prs
-        meta:
-          external_location: "read_csv('s3://data-lake-chodera/github_data/prs.csv', header=True)"
+        config:
+          meta:
+            external_location: "read_csv('s3://data-lake-chodera/github_data/prs.csv', header=True)"
+        loaded_at_field: _extracted_at
       - name: raw_github_repos
-        meta:
-          external_location: "read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
+        config:
+          meta:
+            external_location: "read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
+        loaded_at_field: _extracted_at
       - name: raw_imdb_top_250
-        meta:
-          external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
+        loaded_at_field: "extracted_at :: timestamp"
       - name: raw_letterboxd_diary
-        meta:
-          external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
+        config:
+          meta:
+            external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
+          freshness: null
