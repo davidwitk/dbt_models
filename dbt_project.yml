@@ -31,14 +31,17 @@ models:
         +materialized: table
         +grants: {'select': ['evidence', 'hex', 'metabase']}
   dbt_artifacts:
-    +database: prod
-    +schema: admin
+    +materialized: "{{ 'external' if target.name in ['prod_duckdb', 'dev_duckdb'] else 'table' }}"
+    +database: "{{ 'prod' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
+    +schema: "{{ 'admin' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
     staging:
-      +database: prod
-      +schema: admin
+      +materialized: "{{ 'external' if target.name in ['prod_duckdb', 'dev_duckdb'] else 'view' }}"
+      +database: "{{ 'prod' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
+      +schema: "{{ 'admin' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
     sources:
-      +database: prod
-      +schema: raw_dbt
+      +materialized: "{{ 'external' if target.name in ['prod_duckdb', 'dev_duckdb'] else 'table' }}"
+      +database: "{{ 'prod' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
+      +schema: "{{ 'raw_dbt' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
 
 data_tests:
   +store_failures: true
@@ -47,8 +50,11 @@ data_tests:
 flags:
   source_freshness_run_project_hooks: True
 
+vars:
+  dbt_artifacts_s3_root: s3://data-lake-chodera
+
 on-run-end:
-  # Upload the results dbt_artifacts package when the target is prod
-  - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
+  # Upload the results dbt_artifacts package when the target is prod (postgres or duckdb)
+  - "{% if target.name in ['prod', 'prod_duckdb'] %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
   # Re-run external models with an in-memory version of dbt-duckdb
   - "{% if target.name in ['prod_duckdb', 'dev_duckdb'] %}{{ register_upstream_external_models() }}{% endif %}"
