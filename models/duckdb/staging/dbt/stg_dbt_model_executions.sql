@@ -1,5 +1,8 @@
 with source as (
-    select * from {{ source('raw_dbt', 'model_executions') }}
+    -- Unioning the Postgres and S3 (DuckDB) sources for model executions
+    select 'postgres' as source, * from {{ source('postgres', 'model_executions') }}
+    union all
+    select 'duckdb' as source, * from {{ source('s3', 'raw_dbt_model_executions') }}
 ),
 
 base as (
