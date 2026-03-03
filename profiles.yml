@@ -30,9 +30,9 @@ dbt_models:
         - parquet
       secrets:
         - type: s3
-          region: "eu-central-1"
-          key_id: "${AWS_ACCESS_KEY_ID}"
-          secret: "${AWS_SECRET_ACCESS_KEY}"
+          region: "{{ env_var('AWS_REGION') }}"
+          key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
+          secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
 
     dev_duckdb:
       type: duckdb
