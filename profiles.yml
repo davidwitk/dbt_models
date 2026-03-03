@@ -23,7 +23,7 @@ dbt_models:
 
     ci:
       type: duckdb
-      external_root: "${CI_DUCKDB_EXTERNAL_ROOT}"
+      external_root: "{{ env_var('CI_DUCKDB_EXTERNAL_ROOT') }}"
       threads: 4
       extensions:
         - httpfs
