@@ -43,8 +43,8 @@ dbt_models:
       type: duckdb
       external_root: s3://data-lake-chodera/dbt_models/dev
       attach:
-        - path: postgresql://{{ env_var('POSTGRES_PROD_USER') }}:{{ env_var('POSTGRES_PROD_PW') }}@{{ env_var('POSTGRES_HOST') }}:5432/prod
-          alias: postgres
+        - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
+          alias: prod
           type: postgres
       extensions:
         - httpfs
@@ -58,6 +58,10 @@ dbt_models:
     prod_duckdb:
       type: duckdb
       external_root: s3://data-lake-chodera/dbt_models/prod
+      attach:
+        - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
+          alias: prod
+          type: postgres
       schema: analytics
       threads: 16
       path: md:prod?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}
