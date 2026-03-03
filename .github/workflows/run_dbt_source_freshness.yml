@@ -37,3 +37,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: eu-central-1
           MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PROD_USER: ${{ secrets.POSTGRES_PROD_USER }}
+          POSTGRES_PROD_PW: ${{ secrets.POSTGRES_PROD_PW }}
