@@ -1,11 +1,11 @@
 with source as (
-    select * from {{ source('raw_mubi', 'top_movies') }}
+    select * from {{ source('s3', 'raw_mubi_top_movies') }}
 ),
 
 base as (
 
     select
-        md5(movie_id || to_char(_extracted_at :: timestamp, 'yyyy-mm-dd')) as movie_week_id,
+        md5(movie_id || strftime('%Y-%m-%d', _extracted_at :: timestamp)) as movie_week_id,
 
         date_trunc('week', _extracted_at :: timestamp) as date_week,
 
@@ -22,7 +22,6 @@ base as (
         list_user_id,
 
         -- Meta data
-        _sdc_batched_at,
         _extracted_at :: timestamp as _sdc_extracted_at
 
     from source

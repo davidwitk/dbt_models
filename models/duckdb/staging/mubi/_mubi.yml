@@ -1,17 +1,23 @@
 sources:
-  - name: raw_mubi
+  - name: s3
     config:
       freshness:
         error_after: {count: 7, period: day}
     loaded_at_field: "_extracted_at :: timestamp"
     tables:
-      - name: top_movies
+      - name: raw_mubi_top_movies
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/mubi_data/top_movies/*.parquet')"
         columns:
           - name: _sdc_id
             data_tests:
               - not_null
               - unique
-      - name: top_movies__details
+      - name: raw_mubi_top_movies_details
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/mubi_data/top_movies_details/*.parquet')"
         columns:
           - name: _sdc_id
             data_tests:
@@ -20,4 +26,4 @@ sources:
         data_tests:
           - dbt_utils.equal_rowcount:
               arguments:
-                compare_model: source('raw_mubi', 'top_movies')
+                compare_model: source('s3', 'raw_mubi_top_movies')
