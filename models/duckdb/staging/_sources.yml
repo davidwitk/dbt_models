@@ -42,7 +42,7 @@ sources:
             external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
         loaded_at_field: "extracted_at :: timestamp"
         columns:
-          - name: id
+          - name: id || rank
             data_tests:
               - not_null
               - unique      
