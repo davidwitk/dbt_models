@@ -18,10 +18,6 @@ models:
     duckdb:
       +materialized: external
     postgres:
-      admin:
-        +schema: admin
-        +materialized: table
-        +grants: {'select': ['evidence', 'hex', 'metabase']}
       staging:
         +schema: staging
         +materialized: view
