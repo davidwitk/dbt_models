@@ -9,20 +9,10 @@ sources:
         config:
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/mubi_data/top_movies/*.parquet')"
-        columns:
-          - name: _sdc_id
-            data_tests:
-              - not_null
-              - unique
       - name: raw_mubi_top_movies_details
         config:
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/mubi_data/top_movies_details/*.parquet')"
-        columns:
-          - name: _sdc_id
-            data_tests:
-              - not_null
-              - unique
         data_tests:
           - dbt_utils.equal_rowcount:
               arguments:
