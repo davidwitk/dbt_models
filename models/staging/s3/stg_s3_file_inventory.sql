@@ -15,7 +15,9 @@ base as (
         modification_date,
         size_in_bytes,
         round(size_in_bytes / pow(1024, 2), 2) as size_mb,
-        round(size_in_bytes / pow(1024, 3), 2) as size_gb
+        round(size_in_bytes / pow(1024, 3), 2) as size_gb,
+        _extracted_at,
+        _extracted_at :: date as extracted_date
     from source
 
 )
