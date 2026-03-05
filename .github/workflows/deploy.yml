@@ -36,8 +36,8 @@ jobs:
       - name: Run dbt to generate metadata
         run: |
           uv run dbt deps
-          uv run dbt parse --target prod
-          uv run dbt docs generate --target prod --static
+          uv run dbt parse --target prod_duckdb
+          uv run dbt docs generate --target prod_duckdb --static
         
       - name: Upload manifest and catalog to S3
         run: |
