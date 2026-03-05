@@ -57,3 +57,8 @@ sources:
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/s3_data/file_inventory/*.parquet')"
           freshness: null
+      - name: raw_openweathermap_current_weather
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/openweathermap_data/openweathermap_current_source/*.parquet', union_by_name=true)"
+          freshness: null
