@@ -36,29 +36,3 @@ sources:
           meta:
             external_location: "read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
         loaded_at_field: _extracted_at
-      - name: raw_imdb_top_250
-        config:
-          meta:
-            external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
-        loaded_at_field: "extracted_at :: timestamp"
-        columns:
-          - name: id || rank
-            data_tests:
-              - not_null
-              - unique      
-      - name: raw_letterboxd_diary
-        config:
-          meta:
-            external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
-          freshness: null
-
-      - name: raw_s3_file_inventory
-        config:
-          meta:
-            external_location: "read_parquet('s3://data-lake-chodera/s3_data/file_inventory/*.parquet')"
-          freshness: null
-      - name: raw_openweathermap_current_weather
-        config:
-          meta:
-            external_location: "read_parquet('s3://data-lake-chodera/openweathermap_data/openweathermap_current_source/*.parquet', union_by_name=true)"
-          freshness: null

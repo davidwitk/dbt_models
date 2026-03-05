@@ -1,0 +1,12 @@
+sources:
+  - name: s3
+    config:
+      freshness:
+        error_after: {count: 1, period: hour}
+      loaded_at_field: _sdc_extracted_at
+    tables:
+      - name: raw_openweathermap_current_weather
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/openweathermap_data/openweathermap_current_source/*.parquet', union_by_name=true)"
+          freshness: null

@@ -1,20 +1,10 @@
-with unioned as (
-    -- Unioning the Postgres and S3 (DuckDB) sources for model executions
-    select
-        'postgres' as source,
-        *
-    from {{ source('postgres', 'model_executions') }}
-    union all
-    select
-        'duckdb' as source,
-        *
-    from {{ source('s3', 'raw_dbt_model_executions') }}
+with source as (
+    select * from {{ source('s3', 'raw_dbt_model_executions') }}
 ),
 
 base as (
 
     select
-        source,
         command_invocation_id || node_id as model_execution_id,
         command_invocation_id,
         node_id,
@@ -32,7 +22,7 @@ base as (
         alias,
         message,
         adapter_response
-    from unioned
+    from source
 
 )
 

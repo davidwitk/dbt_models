@@ -10,11 +10,6 @@ permissions:
 
 env:
   DBT_PROFILES_DIR: ./
-  POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-  POSTGRES_PROD_USER: ${{ secrets.POSTGRES_PROD_USER }}
-  POSTGRES_PROD_PW: ${{ secrets.POSTGRES_PROD_PW }}
-  POSTGRES_DEV_USER: ${{ secrets.POSTGRES_DEV_USER }}
-  POSTGRES_DEV_PW: ${{ secrets.POSTGRES_DEV_PW }}
   CI_DUCKDB_EXTERNAL_ROOT: "${{ format('{0}/dbt_models/ci/ci_pr_{1}', secrets.AWS_BUCKET_URL, github.event.number) }}"
 
 jobs:
@@ -81,7 +76,7 @@ jobs:
       - name: Run dbt build (Slim CI)
         run: |
           uv run dbt deps
-          uv run dbt build --select state:modified+1,duckdb --defer --state ./target-base --target ci --target-path target
+          uv run dbt build --select state:modified+1 --defer --state ./target-base --target ci --target-path target
           uv run dbt docs generate --target ci --target-path target
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

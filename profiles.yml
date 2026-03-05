@@ -2,79 +2,42 @@ dbt_models:
   target: dev
   outputs:
     dev:
-      type: postgres
-      host: "{{ env_var('POSTGRES_HOST') }}"
-      user: "{{ env_var('POSTGRES_DEV_USER') }}"
-      password: "{{ env_var('POSTGRES_DEV_PW') }}"
-      port: 5432
-      dbname: prod
-      schema: dev
-      threads: 8
-
-    prod:
-      type: postgres
-      host: "{{ env_var('POSTGRES_HOST') }}"
-      user: "{{ env_var('POSTGRES_PROD_USER') }}"
-      password: "{{ env_var('POSTGRES_PROD_PW') }}"
-      port: 5432
-      dbname: prod
-      schema: analytics
-      threads: 8
-
-    ci:
-      type: duckdb
-      external_root: "{{ env_var('CI_DUCKDB_EXTERNAL_ROOT') }}"
-      threads: 4
-      attach:
-        - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
-          alias: pg_prod
-          type: postgres
-      extensions:
-        - httpfs
-        - parquet
-        - postgres
-      secrets:
-        - type: s3
-          region: "{{ env_var('AWS_REGION') }}"
-          key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
-          secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
-          endpoint: "{{ env_var('AWS_S3_ENDPOINT', '') }}"
-
-    dev_duckdb:
       type: duckdb
       external_root: s3://data-lake-chodera/dbt_models/dev
-      attach:
-        - path: postgresql://{{ env_var('POSTGRES_PROD_USER') }}:{{ env_var('POSTGRES_PROD_PW') }}@{{ env_var('POSTGRES_HOST') }}:5432/prod
-          alias: pg_prod
-          type: postgres
       extensions:
         - httpfs
         - parquet
-        - postgres
       secrets:
         - type: s3
           region: "{{ env_var('AWS_REGION') }}"
           key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
-          endpoint: "{{ env_var('AWS_S3_ENDPOINT', '') }}"
 
-    prod_duckdb:
+    prod:
       type: duckdb
       external_root: s3://data-lake-chodera/dbt_models/prod
-      attach:
-        - path: "host={{ env_var('POSTGRES_HOST') }} port=5432 dbname=prod user={{ env_var('POSTGRES_PROD_USER') }} password={{ env_var('POSTGRES_PROD_PW') }}"
-          alias: pg_prod
-          type: postgres
       schema: analytics
       threads: 16
       path: md:prod?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}
       extensions:
         - httpfs
         - parquet
+      secrets:
+        - type: s3
+          region: "{{ env_var('AWS_REGION') }}"
+          key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
+          secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
+
+    ci:
+      type: duckdb
+      external_root: "{{ env_var('CI_DUCKDB_EXTERNAL_ROOT') }}"
+      threads: 4
+      extensions:
+        - httpfs
+        - parquet
         - postgres
       secrets:
         - type: s3
           region: "{{ env_var('AWS_REGION') }}"
           key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
-          endpoint: "{{ env_var('AWS_S3_ENDPOINT', '') }}"

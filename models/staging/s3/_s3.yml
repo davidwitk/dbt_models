@@ -1,0 +1,11 @@
+sources:
+  - name: s3
+    config:
+      freshness:
+        error_after: {count: 24, period: hour}
+    tables:
+      - name: raw_s3_file_inventory
+        config:
+          meta:
+            external_location: "read_parquet('s3://data-lake-chodera/s3_data/file_inventory/*.parquet')"
+          freshness: null
