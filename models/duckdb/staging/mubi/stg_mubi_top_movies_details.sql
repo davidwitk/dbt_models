@@ -16,7 +16,7 @@ base as (
 
         -- Director data: This is a 1:n relation. For now, we only fetch the first director.
         -- noqa: disable=all
-        CAST(movie_directors AS JSON) AS movie_directors_json,
+        CAST(movie_directors AS JSON) AS movie_directors,
         json_array_length(CAST(movie_directors AS JSON)) AS director_count,
         
         -- Fixed: Replaced json_extract_scalar with json_extract_string

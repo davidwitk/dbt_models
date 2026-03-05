@@ -27,3 +27,17 @@ sources:
           - dbt_utils.equal_rowcount:
               arguments:
                 compare_model: source('s3', 'raw_mubi_top_movies')
+
+models:
+  - name: stg_mubi_top_movies
+    columns:
+      - name: movie_week_id
+        data_tests:
+          - not_null
+          - unique
+  - name: stg_mubi_top_movies_details
+    columns:
+      - name: movie_week_id
+        data_tests:
+          - not_null
+          - unique
