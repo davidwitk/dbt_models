@@ -1,12 +1,4 @@
 sources:
-  - name: postgres
-    database: pg_prod
-    schema: raw_dbt
-
-    tables:
-      - name: invocations
-      - name: model_executions
-
   - name: s3
     tables:
       - name: raw_dbt_invocations
