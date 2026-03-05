@@ -38,6 +38,7 @@ dbt_models:
           region: "{{ env_var('AWS_REGION') }}"
           key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
+          endpoint: "{{ env_var('AWS_S3_ENDPOINT', '') }}"
 
     dev_duckdb:
       type: duckdb
@@ -55,6 +56,7 @@ dbt_models:
           region: "{{ env_var('AWS_REGION') }}"
           key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
+          endpoint: "{{ env_var('AWS_S3_ENDPOINT', '') }}"
 
     prod_duckdb:
       type: duckdb
@@ -75,3 +77,4 @@ dbt_models:
           region: "{{ env_var('AWS_REGION') }}"
           key_id: "{{ env_var('AWS_ACCESS_KEY_ID') }}"
           secret: "{{ env_var('AWS_SECRET_ACCESS_KEY') }}"
+          endpoint: "{{ env_var('AWS_S3_ENDPOINT', '') }}"

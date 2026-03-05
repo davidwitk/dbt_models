@@ -14,30 +14,7 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  dbt_models:
-    duckdb:
-      +materialized: external
-    postgres:
-      staging:
-        +schema: staging
-        +materialized: view
-        +grants: {'select': ['evidence', 'hex', 'metabase']}
-      analytics:
-        +schema: analytics
-        +materialized: table
-        +grants: {'select': ['evidence', 'hex', 'metabase']}
-  dbt_artifacts:
-    +materialized: "{{ 'external' if target.name in ['prod_duckdb', 'dev_duckdb'] else 'table' }}"
-    +database: "{{ 'prod' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
-    +schema: "{{ 'admin' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
-    staging:
-      +materialized: "{{ 'external' if target.name in ['prod_duckdb', 'dev_duckdb'] else 'view' }}"
-      +database: "{{ 'prod' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
-      +schema: "{{ 'admin' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
-    sources:
-      +materialized: "{{ 'external' if target.name in ['prod_duckdb', 'dev_duckdb'] else 'table' }}"
-      +database: "{{ 'prod' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
-      +schema: "{{ 'raw_dbt' if target.name not in ['prod_duckdb', 'dev_duckdb'] else none }}"
+  +materialized: external
 
 data_tests:
   +store_failures: true
@@ -51,6 +28,6 @@ vars:
 
 on-run-end:
   # Upload the results dbt_artifacts package when the target is prod (postgres or duckdb)
-  - "{% if target.name in ['prod', 'prod_duckdb'] %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
+  - "{% if target.name in ['prod_duckdb'] %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
   # Re-run external models with an in-memory version of dbt-duckdb
   - "{% if target.name in ['prod_duckdb', 'dev_duckdb'] %}{{ register_upstream_external_models() }}{% endif %}"
