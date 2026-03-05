@@ -5,13 +5,13 @@ with source as (
 base as (
 
     select
-        md5(movie_id :: varchar || strftime(_extracted_at :: timestamp, '%Y-%m-%d')) as movie_week_id,
+        md5(movie_id || _extracted_at :: date) as movie_week_id,
 
-        movie_id,
+        movie_id :: int as movie_id,
         movie_title,
         movie_title_locale,
-        movie_year,
-        movie_popularity,
+        movie_year :: int as movie_year,
+        movie_popularity :: int as movie_popularity,
         movie_canonical_url as movie_url,
 
         -- Director data: This is a 1:n relation. For now, we only fetch the first director.
@@ -26,7 +26,8 @@ base as (
         -- noqa: enable=all
 
         -- Meta data
-        _extracted_at :: timestamp as _extracted_at
+        _extracted_at :: timestamp as _extracted_at,
+        _extracted_at :: date as _extracted_date
 
     from source
 

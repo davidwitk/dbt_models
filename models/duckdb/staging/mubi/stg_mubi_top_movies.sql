@@ -10,33 +10,25 @@ base as (
         date_trunc('week', _extracted_at :: timestamp) as date_week,
 
         -- Movie data
-        movie_id,
-        movie_rank,
+        movie_id :: int as movie_id,
+        movie_rank :: int as movie_rank,
 
         -- List data
-        list_id,
+        list_id :: int as list_id,
         list_canonical_url as list_url,
-        list_created_at,
-        list_updated_at,
+        to_timestamp(list_created_at) as list_created_at,
+        to_timestamp(list_updated_at) as list_updated_at,
         list_title_locale as list_title,
-        list_user_id,
+        list_user_id :: int as list_user_id,
 
         -- Meta data
-        _extracted_at :: timestamp as _sdc_extracted_at
-
+        _extracted_at :: timestamp as _extracted_at,
+        _extracted_at :: date as _extracted_date,
+        row_number() over (partition by movie_id order by _extracted_at desc) = 1 as is_latest_day,
+        min(_extracted_date) over () as first_extraction_day_overall,
+        min(_extracted_date) over (partition by movie_id) as first_extraction_day
     from source
-
-),
-
-final as (
-
-    select
-        *,
-        row_number() over (partition by movie_id order by _sdc_extracted_at desc) = 1 as is_latest_day,
-        min(_sdc_extracted_at :: date) over () as first_extraction_day_overall,
-        min(_sdc_extracted_at :: date) over (partition by movie_id) as first_extraction_day
-    from base
 
 )
 
-select * from final
+select * from base
