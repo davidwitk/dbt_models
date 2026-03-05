@@ -1,0 +1,11 @@
+sources:
+  - name: s3
+    config:
+      freshness:
+        error_after: {count: 24, period: hour}
+    tables:
+      - name: raw_letterboxd_diary
+        config:
+          meta:
+            external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
+          freshness: null
