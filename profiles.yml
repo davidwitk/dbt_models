@@ -4,6 +4,7 @@ dbt_models:
     dev:
       type: duckdb
       external_root: s3://data-lake-chodera/dbt_models/dev
+      threads: 8
       extensions:
         - httpfs
         - parquet
@@ -31,11 +32,12 @@ dbt_models:
     ci:
       type: duckdb
       external_root: "{{ env_var('CI_DUCKDB_EXTERNAL_ROOT') }}"
-      threads: 4
+      schema: ci
+      threads: 16
+      path: md:ci?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}
       extensions:
         - httpfs
         - parquet
-        - postgres
       secrets:
         - type: s3
           region: "{{ env_var('AWS_REGION') }}"

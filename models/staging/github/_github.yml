@@ -3,12 +3,12 @@ sources:
     config:
       freshness:
         error_after: {count: 24, period: hour}
+    loaded_at_field: _extracted_at
     tables:
       - name: raw_github_commits
         config:
           meta:
             external_location: "read_csv('s3://data-lake-chodera/github_data/commits.csv', header=True)"
-        loaded_at_field: _extracted_at
         columns:
           - name: sha
             data_tests:
@@ -30,9 +30,7 @@ sources:
         config:
           meta:
             external_location: "read_csv('s3://data-lake-chodera/github_data/prs.csv', header=True)"
-        loaded_at_field: _extracted_at
       - name: raw_github_repos
         config:
           meta:
             external_location: "read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
-        loaded_at_field: _extracted_at
