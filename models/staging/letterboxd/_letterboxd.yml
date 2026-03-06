@@ -7,5 +7,5 @@ sources:
       - name: raw_letterboxd_diary
         config:
           meta:
-            external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary.csv', header=True)"
+            external_location: "read_csv('s3://data-lake-chodera/letterboxd_data/diary_enriched.csv', header=True)"
           freshness: null
