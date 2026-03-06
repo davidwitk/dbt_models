@@ -15,6 +15,7 @@ base as (
             when contains(tags, 'tv') then 'tv'
         end as screen_type,
         tags,
+
         rewatch as is_rewatch,
 
         tmdb_rating,
