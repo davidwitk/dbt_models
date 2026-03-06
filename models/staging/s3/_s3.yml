@@ -3,9 +3,9 @@ sources:
     config:
       freshness:
         error_after: {count: 24, period: hour}
+    loaded_at_field: _extracted_at
     tables:
       - name: raw_s3_file_inventory
         config:
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/s3_data/file_inventory/*.parquet')"
-          freshness: null

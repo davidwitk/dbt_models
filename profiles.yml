@@ -4,6 +4,7 @@ dbt_models:
     dev:
       type: duckdb
       external_root: s3://data-lake-chodera/dbt_models/dev
+      threads: 8
       extensions:
         - httpfs
         - parquet

@@ -1,5 +1,9 @@
 sources:
   - name: s3
+    config:
+      freshness:
+        error_after: {count: 24, period: hour}
+    loaded_at_field: "run_started_at :: timestamp"
     tables:
       - name: raw_dbt_invocations
         config:
