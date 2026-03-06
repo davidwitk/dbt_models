@@ -12,7 +12,10 @@ base as (
         dbt_command,
         full_refresh_flag,
         target_profile_name,
-        target_name,
+        case
+            when target_name in ('prod', 'prod_duckdb') then 'prod'
+            else target_name
+        end as target_name,
         target_schema,
         target_threads,
         dbt_cloud_project_id,
@@ -25,6 +28,7 @@ base as (
         invocation_args,
         dbt_custom_envs
     from source
+    where target_name != 'dev_duckdb'
 
 )
 

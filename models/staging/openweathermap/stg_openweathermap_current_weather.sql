@@ -17,8 +17,9 @@ base as (
         -- 3. Location Info
         id :: bigint as location_id,
         case
-            when name = 'Tiergarten' then 'Berlin'
-            when name = 'Attiecoubé' then 'Abidjan'
+            when name in ('Mitte', 'Tiergarten') then 'Berlin'
+            when name in ('Attiecoubé', 'Les deux-Plateaux') then 'Abidjan'
+            when name in ('Strasbourg', 'Arrondissement de Strasbourg') then 'Strasbourg'
             else name
         end as location_name,
         coalesce(sys__country, sys ->> 'country') as location_country,
@@ -29,10 +30,10 @@ base as (
         timezone :: bigint as location_timezone,
 
         -- 4. Temperature (Converting Kelvin to Celsius)
-        round(coalesce(main__temp, (main ->> 'temp') :: decimal) - 273.15, 2) as temperature,
-        round(coalesce(main__temp_max, (main ->> 'temp_max') :: decimal) - 273.15, 2) as temperature_temp_max,
-        round(coalesce(main__temp_min, (main ->> 'temp_min') :: decimal) - 273.15, 2) as temperature_temp_min,
-        round(coalesce(main__feels_like, (main ->> 'feels_like') :: decimal) - 273.15, 2) as temperature_feels_like,
+        round(coalesce(main__temp, (main ->> 'temp') :: decimal - 273.15), 2) as temperature,
+        round(coalesce(main__temp_max, (main ->> 'temp_max') :: decimal - 273.15), 2) as temperature_temp_max,
+        round(coalesce(main__temp_min, (main ->> 'temp_min') :: decimal - 273.15), 2) as temperature_temp_min,
+        round(coalesce(main__feels_like, (main ->> 'feels_like') :: decimal - 273.15), 2) as temperature_feels_like,
 
         -- 5. Atmospheric Metrics
         coalesce(main__humidity, (main ->> 'humidity') :: decimal) :: int as humidity,
