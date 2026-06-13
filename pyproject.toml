@@ -3,9 +3,9 @@ name = "dbt-models"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
-    "dbt-core==1.11.9",
+    "dbt-core==1.11.11",
     "dbt-duckdb==1.10.1",
-    "sqlfluff==4.0.4",
+    "sqlfluff==4.2.2",
 ]
 
 [tool.uv.workspace]
