@@ -1,5 +1,14 @@
+{{ config(
+    materialized='incremental',
+    unique_key='model_execution_id',
+) }}
+
 with source as (
     select * from {{ source('s3', 'raw_dbt_model_executions') }}
+    {% if is_incremental() %}
+        where run_started_at > (select max(run_started_at) from {{ this }}) -- noqa: RF02
+    {% endif %}
+
 ),
 
 base as (

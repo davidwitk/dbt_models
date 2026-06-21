@@ -1,5 +1,14 @@
+{{ config(
+    materialized='incremental',
+    unique_key='weather_id',
+) }}
+
 with source as (
     select * from {{ source('s3', 'raw_openweathermap_current_weather') }}
+    {% if is_incremental() %}
+        where _sdc_extracted_at > (select max(_extracted_at) from {{ this }}) -- noqa: RF02
+    {% endif %}
+
 ),
 
 base as (

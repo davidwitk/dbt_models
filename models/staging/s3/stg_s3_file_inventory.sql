@@ -1,5 +1,14 @@
+{{ config(
+    materialized='incremental',
+    unique_key=['file_url', 'extracted_date'],
+) }}
+
 with source as (
     select * from {{ source('s3', 'raw_s3_file_inventory') }}
+    {% if is_incremental() %}
+        where _extracted_at > (select max(_extracted_at) from {{ this }}) -- noqa: RF02
+    {% endif %}
+
 ),
 
 base as (
