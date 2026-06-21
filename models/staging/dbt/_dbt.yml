@@ -8,8 +8,8 @@ sources:
       - name: raw_dbt_invocations
         config:
           meta:
-            external_location: "read_parquet('s3://data-lake-chodera/dbt_artifacts/invocations/*.parquet')"
+            external_location: "read_parquet('s3://data-lake-chodera/dbt_artifacts/invocations/*.parquet', union_by_name=True)"
       - name: raw_dbt_model_executions
         config:
           meta:
-            external_location: "read_parquet('s3://data-lake-chodera/dbt_artifacts/model_executions/*.parquet')"
+            external_location: "read_parquet('s3://data-lake-chodera/dbt_artifacts/model_executions/*.parquet', union_by_name=True)"
