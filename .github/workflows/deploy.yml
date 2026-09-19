@@ -39,7 +39,7 @@ jobs:
         run: |
           uv run dbt deps
           uv run dbt parse --target prod
-          uv run dbt docs generate --target prod --static
+          uv run dbt docs generate --target prod --output-dir public
         
       - name: Upload manifest and catalog to S3
         run: |
@@ -49,11 +49,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: eu-central-1
-
-      - name: Prepare documentation for deployment
-        run: |
-          mkdir public
-          mv target/static_index.html public/index.html
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
