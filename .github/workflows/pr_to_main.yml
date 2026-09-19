@@ -10,6 +10,7 @@ permissions:
 
 env:
   DBT_PROFILES_DIR: ./
+  DBT_ENGINE_NO_WARN_SEMANTIC_MANIFEST_VALIDATION: true
   CI_DUCKDB_EXTERNAL_ROOT: "${{ format('{0}/dbt_models/ci/ci_pr_{1}', secrets.AWS_BUCKET_URL, github.event.number) }}"
 
 jobs:

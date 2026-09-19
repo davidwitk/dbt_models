@@ -1,45 +1,33 @@
-semantic_models:
-
+models:
   - name: fct_weather
-    defaults:
-      agg_time_dimension: measured_at
-    model: ref('fct_weather')
-
-    entities:
+    semantic_model:
+      enabled: true
+    agg_time_dimension: measured_at
+    columns:
       - name: weather_id
-        type: primary
-    
-    measures:
+        entity:
+          type: primary
+          name: weather
+      - name: measured_at
+        granularity: day
+        dimension:
+          type: time
+      - name: location_name
+        dimension:
+          type: categorical
+      - name: location_country
+        dimension:
+          type: categorical
+    metrics:
       - name: measure_count
+        description: Count of total measures.
+        type: simple
+        label: Measure Count
         agg: count
-        expr: 1
+        expr: "1"
       - name: average_temperature
-        description: The average temperature.
+        description: Average temperature of specified measures.
+        type: simple
+        label: Average Temperature
         agg: average
         expr: temperature
-
-    dimensions:
-      - name: measured_at
-        expr: measured_at
-        type: time
-        type_params:
-          time_granularity: day
-      - name: location_name
-        type: categorical
-      - name: location_country
-        type: categorical
-
-
-metrics:
-  - name: measure_count
-    description: Count of total measures. 
-    type: simple
-    label: Measure Count
-    type_params:
-      measure: measure_count
-  - name: average_temperature
-    description: Average temperature of specified measures. 
-    type: simple
-    label: Average Temperature
-    type_params:
-      measure: average_temperature

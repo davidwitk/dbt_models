@@ -3,7 +3,7 @@ sources:
     config:
       freshness:
         error_after: {count: 24, period: hour}
-    loaded_at_field: "extracted_at :: timestamp"
+      loaded_at_field: "extracted_at :: timestamp"
     tables:
       - name: raw_imdb_top_250
         config:
