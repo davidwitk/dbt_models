@@ -46,12 +46,12 @@ wheels = [
 
 [[package]]
 name = "dbt"
-version = "2.0.5"
+version = "2.0.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "mashumaro", extra = ["msgpack"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e5/75/2c2da41b5ccdd6e7fda04d3f532f0bce01ac19ab2f65a5c0310d88ac7154/dbt-2.0.5.tar.gz", hash = "sha256:2192f00cea868322e77fbe9d241cbe86d42d2edd5975531b7b672baebf438750", size = 3289, upload-time = "2026-09-17T22:42:09.967Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b2/a0/89db2b6e0abc254b31ef9995af17b76b1eef27b2362d8be0120add315abf/dbt-2.0.6.tar.gz", hash = "sha256:1e1b69302fcaa5e30fb0ab76e845693e679cad4ae48cbdfab3b425a33a94af16", size = 3291, upload-time = "2026-09-19T13:22:27.612Z" }
 
 [[package]]
 name = "dbt-models"
@@ -64,7 +64,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "dbt", specifier = "==2.0.5" },
+    { name = "dbt", specifier = "==2.0.6" },
     { name = "sqlfluff", specifier = "==4.3.0" },
 ]
 
