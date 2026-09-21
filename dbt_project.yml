@@ -26,8 +26,10 @@ flags:
 vars:
   dbt_artifacts_s3_root: s3://data-lake-chodera
 
+on-run-start:
+  # Register external sources before freshness queries them as DuckDB relations.
+  - "{% if target.name in ['prod', 'dev'] %}{{ register_upstream_external_models() }}{% endif %}"
+
 on-run-end:
   # Upload the results dbt_artifacts package when the target is prod (postgres or duckdb)
   - "{% if target.name == 'prod' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
-  # Re-run external models with an in-memory version of dbt-duckdb
-  - "{% if target.name in ['prod', 'dev'] %}{{ register_upstream_external_models() }}{% endif %}"

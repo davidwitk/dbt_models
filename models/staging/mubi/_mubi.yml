@@ -3,14 +3,16 @@ sources:
     config:
       freshness:
         error_after: {count: 7, period: day}
-      loaded_at_field: "_extracted_at :: timestamp"
+      loaded_at_field: "timezone('UTC', _extracted_at :: timestamp)"
     tables:
       - name: raw_mubi_top_movies
         config:
+          loaded_at_query: "select max(timezone('UTC', _extracted_at :: timestamp)) from read_parquet('s3://data-lake-chodera/mubi_data/top_movies/*.parquet')"
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/mubi_data/top_movies/*.parquet')"
       - name: raw_mubi_top_movies_details
         config:
+          loaded_at_query: "select max(timezone('UTC', _extracted_at :: timestamp)) from read_parquet('s3://data-lake-chodera/mubi_data/top_movies_details/*.parquet')"
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/mubi_data/top_movies_details/*.parquet')"
         data_tests:

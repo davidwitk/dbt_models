@@ -3,10 +3,11 @@ sources:
     config:
       freshness:
         error_after: {count: 24, period: hour}
-      loaded_at_field: "extracted_at :: timestamp"
+      loaded_at_field: "timezone('UTC', extracted_at :: timestamp)"
     tables:
       - name: raw_imdb_top_250
         config:
+          loaded_at_query: "select max(timezone('UTC', extracted_at :: timestamp)) from read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/imdb_data/imdb_top_250/*.parquet', union_by_name=True)"
         columns:

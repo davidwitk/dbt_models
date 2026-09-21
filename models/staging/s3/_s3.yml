@@ -7,5 +7,6 @@ sources:
     tables:
       - name: raw_s3_file_inventory
         config:
+          loaded_at_query: "select max(_extracted_at) from read_parquet('s3://data-lake-chodera/s3_data/file_inventory/*.parquet')"
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/s3_data/file_inventory/*.parquet')"

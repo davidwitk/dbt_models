@@ -7,6 +7,7 @@ sources:
     tables:
       - name: raw_github_commits
         config:
+          loaded_at_query: "select max(_extracted_at) from read_csv('s3://data-lake-chodera/github_data/commits.csv', header=True)"
           meta:
             external_location: "read_csv('s3://data-lake-chodera/github_data/commits.csv', header=True)"
         columns:
@@ -16,6 +17,7 @@ sources:
               - unique
       - name: raw_github_prs
         config:
+          loaded_at_query: "select max(_extracted_at) from read_csv('s3://data-lake-chodera/github_data/prs.csv', header=True)"
           meta:
             external_location: "read_csv('s3://data-lake-chodera/github_data/prs.csv', header=True)"
         columns:
@@ -25,6 +27,7 @@ sources:
               - unique
       - name: raw_github_repos
         config:
+          loaded_at_query: "select max(_extracted_at) from read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
           meta:
             external_location: "read_csv('s3://data-lake-chodera/github_data/repos.csv', header=True)"
         columns:

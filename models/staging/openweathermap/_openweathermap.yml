@@ -7,5 +7,6 @@ sources:
     tables:
       - name: raw_openweathermap_current_weather
         config:
+          loaded_at_query: "select max(_sdc_extracted_at) from read_parquet('s3://data-lake-chodera/openweathermap_data/openweathermap_current_source/*.parquet', union_by_name=true)"
           meta:
             external_location: "read_parquet('s3://data-lake-chodera/openweathermap_data/openweathermap_current_source/*.parquet', union_by_name=true)"
