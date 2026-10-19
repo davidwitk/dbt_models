@@ -16,13 +16,13 @@ base as (
 
         -- Director data: This is a 1:n relation. For now, we only fetch the first director.
         -- noqa: disable=all
-        CAST(movie_directors AS JSON) AS movie_directors,
-        json_array_length(CAST(movie_directors AS JSON)) AS director_count,
-        
+        movie_directors :: json as movie_directors,
+        json_array_length(movie_directors :: json) as director_count,
+
         -- Fixed: Replaced json_extract_scalar with json_extract_string
-        json_extract_string(CAST(movie_directors AS JSON), '$[0].id') AS director_id_first,
-        json_extract_string(CAST(movie_directors AS JSON), '$[0].name') AS director_name_first,
-        json_extract_string(CAST(movie_directors AS JSON), '$[0].canonical_url') AS director_url_first,
+        json_extract_string(movie_directors :: json, '$[0].id') as director_id_first,
+        json_extract_string(movie_directors :: json, '$[0].name') as director_name_first,
+        json_extract_string(movie_directors :: json, '$[0].canonical_url') as director_url_first,
         -- noqa: enable=all
 
         -- Meta data
